@@ -272,8 +272,7 @@ Source: ".\{output}\Uninstall.exe"; DestDir: "{app}"; Flags: ignoreversion
 #endif
 #endif
 #endif
-
-
+Source: "{app}\etc\ciflog.conf"; DestDir: "{app}\etc"; Flags: ignoreversion; AfterInstall: SetJDKHome
 
 [Dirs]
 ;创建一个隐藏的系统文件夹存放卸载程序
@@ -328,6 +327,61 @@ UseRelativePaths=True
 [Code]
 #include ".\{code}\Code.iss"
 
+function MultiByteToWideChar(
+  CodePage: UINT; dwFlags: DWORD; const lpMultiByteStr: AnsiString;
+    cchMultiByte: Integer; lpWideCharStr: string; cchWideChar: Integer): Integer;
+  external 'MultiByteToWideChar@kernel32.dll stdcall';  
 
 
 
+function WideCharToMultiByte(CodePage: UINT; dwFlags: DWORD;
+  lpWideCharStr: string; cchWideChar: Integer; lpMultiByteStr: AnsiString;
+  cchMultiByte: Integer; lpDefaultCharFake: Integer;
+  lpUsedDefaultCharFake: Integer): Integer;
+  external 'WideCharToMultiByte@kernel32.dll stdcall';
+
+function SaveStringToFileInCP(FileName: string; S: string; CP: Integer; append: Boolean): Boolean;
+var
+  Ansi: AnsiString;
+  Len: Integer;
+begin
+  Len := WideCharToMultiByte(CP, 0, S, Length(S), Ansi, 0, 0, 0);
+  SetLength(Ansi, Len);
+  WideCharToMultiByte(CP, 0, S, Length(S), Ansi, Len, 0, 0);
+  Result := SaveStringToFile(FileName, Ansi, False);
+end;
+
+
+procedure SetJDKHome();
+var
+  S: String;
+  Ansi: AnsiString;
+  res: Boolean;
+  Strings: TArrayOfString;
+  i: Integer;
+  Len: Integer;
+  FileName: String;
+  begin
+
+    MsgBox('About to install MyProg.exe as ' + CurrentFileName + '.', mbInformation, MB_OK);
+  res := LoadStringsFromFile(CurrentFileName, Strings);
+  if res then
+  begin
+  for i := 0 to GetArrayLength(Strings) - 1 do
+    Ansi:=Strings[i] ;
+    Len := MultiByteToWideChar(65001, 0, Ansi, Length(Ansi), S, 0);
+    SetLength(S, Len);
+    MultiByteToWideChar(65001, 0, Ansi, Length(Ansi), S, Len);
+     if Pos('jdkhome', S) > 0 then
+     begin
+        Insert('#', S, 0);
+           Len := WideCharToMultiByte(65001, 0, S, Length(S), Ansi, 0, 0, 0);
+  SetLength(Ansi, Len);
+  WideCharToMultiByte(65001, 0, S, Length(S), Ansi, Len, 0, 0);
+     end;
+       Strings[i] := Ansi;
+    
+   end;
+     SaveStringsToFile(CurrentFileName, Strings, False);
+  SaveStringToFileInCP(CurrentFileName, 'jdkhome=', 65001, True)
+end;
