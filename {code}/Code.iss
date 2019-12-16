@@ -109,6 +109,8 @@ end;
 
 procedure pictures_slides_animation(HandleW, Msg, idEvent, TimeSys: longword); forward;
 
+
+
 //暂停轮播
 procedure slide_pause_for_a_while(HandleW, Msg, idEvent, TimeSys: longword);
 begin
@@ -304,8 +306,8 @@ begin
     fake_main_form.ClientHeight := WizardForm.ClientHeight;
     fake_main_form.Left := WizardForm.Left - ScaleX(999999);
     fake_main_form.Top := WizardForm.Top - ScaleY(999999);
-    fake_main_form.Show;
-    taskbar_update_timer := SetTimer(0, 0, 500, WrapTimerProc(@Update_Img, 4));
+    //fake_main_form.Show;
+    //taskbar_update_timer := SetTimer(0, 0, 500, WrapTimerProc(@Update_Img, 4));
   end;
 end;
 
@@ -331,59 +333,7 @@ begin
   SetWindowRgn(aForm.Handle, FormRegion, True);
 end;
 
-//这个函数的作用是判断是否已经安装了将要安装的产品，若已经安装，则返回TRUE，否则返回FALSE
-function is_installed_before() : boolean;
-begin
-#ifndef _WIN64
-  if is_platform_windows_7 then
-  begin
-    if Is64BitInstallMode then
-    begin
-      if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_64) then
-      begin
-        RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_64, 'DisplayVersion', version_installed_before);
-        Result := True;
-      end else
-      begin
-        version_installed_before := '0.0.0';
-        Result := False;
-      end;
-    end else
-    begin
-      if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32) then
-      begin
-        RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32, 'DisplayVersion', version_installed_before);
-        Result := True;
-      end else
-      begin
-        version_installed_before := '0.0.0';
-        Result := False;
-      end;
-    end;
-  end else
-  begin
-    if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32) then
-      begin
-        RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32, 'DisplayVersion', version_installed_before);
-        Result := True;
-      end else
-      begin
-        version_installed_before := '0.0.0';
-        Result := False;
-      end;
-  end;
-#else
-  if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32) then
-  begin
-    RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32, 'DisplayVersion', version_installed_before);
-    Result := True;
-  end else
-  begin
-    version_installed_before := '0.0.0';
-    Result := False;
-  end;
-#endif
-end;
+
 
 //这个函数的作用是判断是否正在安装旧版本（若系统中已经安装了将要安装的产品），是则返回TRUE，否则返回FALSE
 function is_installing_older_version() : boolean;
@@ -692,6 +642,7 @@ begin
   ImgApplyChanges(messagebox_close.Handle);
 end;
 
+
 //释放安装程序时调用的脚本
 procedure release_installer();
 begin
@@ -746,7 +697,7 @@ end;
 procedure CancelButtonClick(CurPageID : integer; var Cancel, Confirm: boolean);
 begin
   Confirm := False;
-  messagebox_close.Center();
+  //messagebox_close.CenterWindow();
   messagebox_close.ShowModal();
   if can_exit_setup then
   begin
@@ -758,34 +709,7 @@ begin
   end;
 end;
 
-//重载安装程序初始化函数，判断是否已经安装新版本，是则禁止安装
-function InitializeSetup() : boolean;
-begin
-#ifndef PortableBuild
-#ifdef OnlyInstallNewVersion
-  if is_installed_before() then
-  begin
-    if is_installing_older_version() then
-    begin
-      MsgBox(CustomMessage('init_setup_outdated_version_warning'), mbInformation, MB_OK);
-      Result := False;
-    end else
-    begin
-      Result := True;
-    end;
-  end else
-  begin
-    Result := True;
-  end;
-#else
-  Result := True;
-#endif
-#else
-  Result := True;
-#endif
-end;
-
-//重载安装程序初始化函数（和上边那个不一样），进行初始化操作
+ //重载安装程序初始化函数（和上边那个不一样），进行初始化操作
 procedure InitializeWizard();
 begin
   is_installer_initialized := True;
@@ -888,6 +812,87 @@ begin
   cur_pic_no := 0;
   cur_pic_pos := 0;
 end;
+//这个函数的作用是判断是否已经安装了将要安装的产品，若已经安装，则返回TRUE，否则返回FALSE
+function is_installed_before() : boolean;
+begin
+#ifndef _WIN64
+  if is_platform_windows_7 then
+  begin
+    if Is64BitInstallMode then
+    begin
+      if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_64) then
+      begin
+        RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_64, 'DisplayVersion', version_installed_before);
+        Result := True;
+      end else
+      begin
+        version_installed_before := '0.0.0';
+        Result := False;
+      end;
+    end else
+    begin
+      if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32) then
+      begin
+        RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32, 'DisplayVersion', version_installed_before);
+        Result := True;
+      end else
+      begin
+        version_installed_before := '0.0.0';
+        Result := False;
+      end;
+    end;
+  end else
+  begin
+    if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32) then
+      begin
+        RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32, 'DisplayVersion', version_installed_before);
+        Result := True;
+      end else
+      begin
+        version_installed_before := '0.0.0';
+        Result := False;
+      end;
+  end;
+#else
+  if RegKeyExists(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32) then
+  begin
+    RegQueryStringValue(HKEY_LOCAL_MACHINE, PRODUCT_REGISTRY_KEY_32, 'DisplayVersion', version_installed_before);
+    Result := True;
+  end else
+  begin
+    version_installed_before := '0.0.0';
+    Result := False;
+  end;
+#endif
+end;
+//重载安装程序初始化函数，判断是否已经安装新版本，是则禁止安装
+function InitializeSetup() : boolean;
+begin
+#ifndef PortableBuild
+#ifdef OnlyInstallNewVersion
+  if is_installed_before() then
+  begin
+    if is_installing_older_version() then
+    begin
+      MsgBox(CustomMessage('init_setup_outdated_version_warning'), mbInformation, MB_OK);
+      Result := False;
+    end else
+    begin
+      Result := True;
+    end;
+  end else
+  begin
+    Result := True;
+  end;
+#else
+  Result := True;
+#endif
+#else
+  Result := True;
+#endif
+end;
+
+
 
 //安装程序销毁时会调用这个函数
 procedure DeinitializeSetup();
@@ -1074,3 +1079,5 @@ begin
   if (PageID = wpPreparing) then Result := True;
   if (PageID = wpInfoAfter) then Result := True;
 end;
+
+

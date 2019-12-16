@@ -123,7 +123,7 @@ DefaultDirName                  = {pf32}\{#MyAppPublisher}\{#MyAppName}
 #ifdef Windows7AndNewer
 MinVersion                      = 0,6.1.7600
 #else
-MinVersion                      = 0,5.1.2600
+MinVersion                      = 0,6.1.7600
 #endif
 #ifdef RegisteAssociations
 ChangesAssociations             = yes
@@ -234,61 +234,63 @@ chinesesimplified.installing_label_text               =正在安装
 
 [Files]
 ;包含所有临时资源文件
-Source: ".\{tmp}\background_finish.png";        DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\background_installing.png";    DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\background_messagebox.png";    DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\background_welcome.png";       DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\background_welcome_more.png";  DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\botva2.dll";                   DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_browse.png";            DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_cancel.png";            DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_close.png";             DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_customize_setup.png";   DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_finish.png";            DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_license.png";           DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_minimize.png";          DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_ok.png";                DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\button_setup_or_next.png";     DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\background_finish.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\background_installing.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\background_messagebox.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\background_welcome.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\background_welcome_more.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\botva2.dll"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_browse.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_cancel.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_close.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_customize_setup.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_finish.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_license.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_minimize.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_ok.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\button_setup_or_next.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
 Source: ".\{tmp}\button_uncustomize_setup.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\checkbox_license.png";         DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\checkbox_license.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
 #ifdef RegisteAssociations
-Source: ".\{tmp}\checkbox_setdefault.png";      DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\checkbox_setdefault.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
 #endif
-Source: ".\{tmp}\InnoCallback.dll";             DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\progressbar_background.png";   DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\progressbar_foreground.png";   DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\InnoCallback.dll"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\progressbar_background.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\progressbar_foreground.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
 #ifdef ShowSlidePictures
-Source: ".\{tmp}\slides_picture_1.png";         DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\slides_picture_2.png";         DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\slides_picture_3.png";         DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
-Source: ".\{tmp}\slides_picture_4.png";         DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\slides_picture_1.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\slides_picture_2.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\slides_picture_3.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
+Source: ".\{tmp}\slides_picture_4.png"; DestDir: "{tmp}"; Flags: dontcopy solidbreak; Attribs: hidden system
 #endif
 ;包含待打包项目的所有文件及文件夹
 ;Source: ".\{#MyAppBinDir}\*";                   DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 #ifndef PortableBuild
 #ifdef UseCustomUninstaller
 #if FileExists(".\{output}\Uninstall.exe")
-Source: ".\{output}\Uninstall.exe";             DestDir: "{app}"; Flags: ignoreversion
+Source: ".\{output}\Uninstall.exe"; DestDir: "{app}"; Flags: ignoreversion
 #endif
 #endif
 #endif
 
-#ifndef PortableBuild
+
+
 [Dirs]
 ;创建一个隐藏的系统文件夹存放卸载程序
 Name: "{app}\Uninstaller"; Attribs: hidden system
-#endif
+
 
 #ifndef PortableBuild
 #ifdef UseCustomUninstaller
+
 [INI]
-Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Name";    String: "{#MyAppName}"
+Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Name"; String: "{#MyAppName}"
 Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Version"; String: "{#MyAppVersion}"
-Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Mutex";   String: "{#MyAppMutex}"
-Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Path";    String: "{uninstallexe}"
-Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Params";  String: "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART"
-Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Dir";     String: "{app}\Uninstaller"
-Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "File";    String: "Uninstaller.zip"
+Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Mutex"; String: "{#MyAppMutex}"
+Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Path"; String: "{uninstallexe}"
+Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Params"; String: "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART"
+Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "Dir"; String: "{app}\Uninstaller"
+Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "File"; String: "Uninstaller.zip"
 #endif
 #endif
 
@@ -312,9 +314,20 @@ Filename: "{app}\Uninstall.ini"; Section: "General"; Key: "File";    String: "Un
 ;#endif
 
 #ifndef PortableBuild
+
 [UninstallDelete]
 ;卸载时删除安装目录下的所有文件及文件夹
 Type: filesandordirs; Name: "{app}"
 #endif
 
+
+
+[ThirdParty]
+UseRelativePaths=True
+
+[Code]
 #include ".\{code}\Code.iss"
+
+
+
+
